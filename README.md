@@ -25,7 +25,7 @@ Ensure you have Python 3.7+ installed on your system. Then, follow these steps t
    ```
 
 3. Set up your OpenAI API key:
-   - Obtain an API key from [OpenAI](https://openai.com/).
+   - Obtain an API key from [OpenAI](https://openai.com/). (or your preferred LLM)
    - Replace `"your_openai_api_key_here"` in the application code with your actual API key.
 
 ## Running the Application
