@@ -18,12 +18,24 @@ async def decompose_complex_question(question: str) -> List[str]:
 
     return decomposed_questions
 
-async def specific_query(query_text: str):
-    # Simulated data fetch and processing, replace with actual data retrieval and processing logic
-    prompt = f"Find the relevant info to answer: {query_text}"
-    # Simulated response for the purpose of this example, replace with actual API call
-    response = "Simulated answer based on the query"
-    return {"response": response}
+async def specific_query(query_text: str) -> Dict[str, str]:
+    """
+    Queries a GPT model for an answer to a specific question.
+    
+    Args:
+        query_text (str): The question to query the model about.
+    
+    Returns:
+        Dict[str, str]: A dictionary with the question and the model's response.
+    """
+    try:
+        # Use the question as the prompt for the GPT model
+        response_text = await get_gpt_response(query_text)
+        return {"question": query_text, "answer": response_text}
+    except HTTPException as e:
+        # In case of an HTTP exception, return an error message instead
+        logging.error(f"Error querying GPT model: {e.detail}")
+        return {"question": query_text, "answer": "Failed to get response from the GPT model."}
 
 @app.get("/query/{query_text}")
 async def query_category(query_text: str):
